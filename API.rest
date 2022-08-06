@@ -1,0 +1,65 @@
+
+
+### API CREATE A NEW USER
+POST http://localhost:8000/user/registration
+Content-Type: application/json
+
+{
+    "fullname": "greiq",
+    "email": "greiq@gmail.com",
+    "password": "12345678"
+}
+
+
+### API LOGIN, Ket : MENDAPATKAN TOKEN BARU SETIAP KALI LOGIN LAGI
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "email": "greiq@gmail.com",
+    "password": "12345678"
+}
+
+### API CREATE A NEW POST - KET : JIKA INI PRIVATE API, KITA PERLU MEMASUKAN TOKEN YG TADI SUDAH KAMU DAPATKAN SAAT LOGIN, IBARAT TANDA PENGENAL
+POST http://localhost:8000/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJncmVpcSIsImVtYWlsIjoiZ3JlaXFAZ21haWwuY29tIiwiaWF0IjoxNjU5ODAwODA3LCJleHAiOjE2NTk4ODcyMDd9.dYyaNk-gDnHfjSFUZgqM4hByUp2-MiNa6l3cFj3em_0
+
+{
+    "title": "Pantai Gatra 3",
+    "image": "https://salsawisata.b-cdn.net/wp-content/uploads/2021/11/Pantai-Gatra.jpg",
+    "body": "Pantai Gatra merupakan salah satu pantai terindah di Indonesia"
+}
+
+### API GET ALL USER
+
+GET http://localhost:8000/users
+
+### API GET ALL POST
+
+GET http://localhost:8000/posts
+
+### API GET ONE POST
+GET http://localhost:8000/posts/1
+
+### API UPDATE POST
+PUT  http://localhost:8000/posts/10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJncmVpcSIsImVtYWlsIjoiZ3JlaXFAZ21haWwuY29tIiwiaWF0IjoxNjU5ODAwODA3LCJleHAiOjE2NTk4ODcyMDd9.dYyaNk-gDnHfjSFUZgqM4hByUp2-MiNa6l3cFj3em_0
+
+{
+    "title": "Pantai Gatra",
+    "image": "2https://salsawisata.b-cdn.net/wp-content/uploads/2021/11/Pantai-Gatra.jpg",
+    "body": "3Pantai Gatra merupakan salah satu pantai terindah di Indonesia"
+}
+
+### API EDIT USER
+PUT  http://localhost:8000/user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZnVsbG5hbWUiOiJncmVpcTEyMzQ1NiIsImVtYWlsIjoiZ3JlaXExMjM0NTZAZ21haWwuY29tIiwiaWF0IjoxNjU5Nzk0MDk3LCJleHAiOjE2NTk4ODA0OTd9.XZBY-2I8zyaGiflYAIDvbKE5YmjKKgEIxzI5OBsm5hc
+
+{
+    "fullname" : "greiq1234",
+    "email" : "greiq1234@gmail.com",
+    "password" : "123456"
+}
