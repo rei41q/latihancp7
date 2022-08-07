@@ -1,49 +1,24 @@
 const express = require('express');
-const { Post } = require("../database/models")
 const postRouter = express.Router();
-const authUser = require("../auth/auth.route");
 const tokenVerification = require('../middleware/token.verification');
 const postController = require("./post.controller");
 postRouter.use(express.json());
 
- postRouter.post("/posts", tokenVerification, (postController.postUser))
+// API CREATE POST
 
-postRouter.get("/posts", async (req, res) =>{
-    const getAllPost = await Post.findAll();
-    return res.json(getAllPost) 
-})
+postRouter.post("/posts", tokenVerification, (postController.postUser))
 
-postRouter.get("/posts/:postID", async (req, res) =>{
-    const {postID}   = req.params;
-    const getOnePost = await Post.findByPk(postID);
-    return res.json(getOnePost) 
-})
+// -------------------------------------------------------------#
 
-postRouter.put("/posts/:postID", tokenVerification, async (req, res) =>{
-   try {
-    const { postID }   = req.params;
-    const {title, image, body} = req.body
+// API GET ALL POST 
+postRouter.get("/posts", (postController.getAllPost));
 
-    const UpdatePost = await Post.update({
-        title: title,
-        image: image,
-        body: body
-    },
-    {
-        where:{
-            id: postID
-        }
-    }
-    );
-    if(UpdatePost)
-    return res.json("update berhasil") 
-    else
-    return res.json("Post ID tidak ada, silahkan masukan post ID yang tersedia") 
-   } catch (error) {
-    return res.status(500).send("Kesalahan pada server, silahkan coba lagi nanti") 
-   }
-  
-})
+//------------------------------------------------------------#
 
+// GET One Post
+
+postRouter.get("/posts/:postID", (postController.getOnePost))
+
+postRouter.put("/posts/:postID", tokenVerification, (postController.editPost))
 
 module.exports = postRouter;
